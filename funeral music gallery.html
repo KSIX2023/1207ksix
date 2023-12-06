@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body {
+    background: url('background.gif') no-repeat center center fixed;
+    background-size: cover;
+}
+
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#gallery img {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}
+
+#cdPlayer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#cdImage {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+        </style>
+    </head>
+    <body>
+        <div id="gallery">
+            <img id="img1" src="image1.jpg" onclick="playMusic(1)">
+            <img id="img2" src="image2.jpg" onclick="playMusic(2)">
+            <img id="img3" src="image3.jpg" onclick="playMusic(3)">
+            <img id="img4" src="image4.jpg" onclick="playMusic(4)">
+            <img id="img5" src="image5.jpg" onclick="playMusic(5)">
+            <img id="img6" src="image6.jpg" onclick="playMusic(6)">
+            <img id="img7" src="image7.jpg" onclick="playMusic(7)">
+            <img id="img8" src="image8.jpg" onclick="playMusic(8)">
+            <img id="img9" src="image9.jpg" onclick="playMusic(9)">
+            <img id="img10" src="image10.jpg" onclick="playMusic(10)">
+            <img id="img11" src="image11.jpg" onclick="playMusic(11)">
+            <img id="img12" src="image12.jpg" onclick="playMusic(12)">
+            <!-- 나머지 이미지들 -->
+        </div>
+
+        <div id="cdPlayer" style="display: none;">
+            <img id="cdImage">
+            <audio id="audioPlayer"></audio>
+            <button id="stopButton" onclick="stopMusic()">그만듣기</button>
+            <button id="nextButton" onclick="nextMusic()">다음 음악 듣기</button>
+        </div>
+        <script>
+          function playMusic(id) {
+    document.getElementById('cdPlayer').style.display = 'block';
+    var cdImage = document.getElementById('cdImage');
+    cdImage.src = 'cd' + id + '.png';
+    var audioPlayer = document.getElementById('audioPlayer');
+    audioPlayer.src = 'music' + id + '.mp3';
+    audioPlayer.play();
+}
+var currentMusicId = 1;
+
+
+
+function stopMusic() {
+    var audioPlayer = document.getElementById('audioPlayer');
+    audioPlayer.pause();
+}
+
+function nextMusic() {
+    var nextMusicId = currentMusicId % 12 + 1;
+    playMusic(nextMusicId);
+}
+        </script>
+    </body>
+</html>
